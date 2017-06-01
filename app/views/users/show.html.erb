@@ -1,0 +1,39 @@
+<h3> Hello, <%= current_user.first_name %>! </h3>
+<a href='users/<%=current_user.id%>'> My Playlist </a>
+
+<h4> All the songs in our hub: </h4>
+  <table>
+    <thead>
+      <tr>
+        <th>Artist</th>
+        <th>Song Title</th>
+        <th># of times song has been added</th>
+        <th>Add to Playlist</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @songs.each do |song| %>
+      <tr>
+        <td> <%=song.artist %> </td>
+        <td> <a href='/songs/<%=song.id%>'><%=song.title %></a></td>
+        <td> <%=song.favorites.count%> </td>
+        <td>
+          <form action='/users/faves/<%=song.id%>' method='post'>
+            <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+            <input type='submit' value='Add'>
+          </form>
+        </td>
+      </tr>
+        <%end%>
+    </tbody>
+  </table>
+<br>
+<fieldset>
+  <h4> Add a Song </h4>
+    <form action='/songs/create' method='post'>
+      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+      <p>Title:<input type='text' name='title'></p>
+      <p>Artist:<input type='text' name='artist'></p>
+      <input type='submit' value='Add Song'>
+    </form>
+</fieldset>

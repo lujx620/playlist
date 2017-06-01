@@ -1,0 +1,23 @@
+<h3> Others who also added <%=@song.artist%> - <%=@song.title%> </h3>
+
+<table>
+  <thead>
+    <tr>
+      <th> Name</th>
+      <th>Times Added</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @song.users.each do |x| %>
+    <tr>
+      <td>
+        <a href='/users/<%=x.id%>'><%=x.first_name%> <%=x.last_name%></a>
+      </td>
+      <td><%=x.favorites.count%></td>
+      <%end%>
+    </tr>
+
+  </tbody>
+</table>
+<br>
+<a href='/songs'>Back to Dashboard</a>
