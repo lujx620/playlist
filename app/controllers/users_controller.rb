@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :require_login, only:[:show, :favorites, :playlist]
   def create
-    @user= User.create(first_name: params[:first_name], last_name: params[:last_name], email: params[:email],password: params[:password])
+    @user= User.create(first_name: params[:first_name], last_name: params[:last_name], email: params[:email], password: params[:password])
     if @user.valid?
       session[:user_id]= @user.id
       redirect_to "/songs"
@@ -12,6 +12,7 @@ class UsersController < ApplicationController
   end
   def show
     @songs = Song.order('created_at DESC')
+    # @songs= Song.all
   end
 
   def favorites

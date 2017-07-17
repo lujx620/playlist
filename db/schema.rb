@@ -11,27 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170601150800) do
+ActiveRecord::Schema.define(version: 20170602155002) do
 
   create_table "favorites", force: :cascade do |t|
-    t.integer  "song_id"
+    t.integer  "count"
     t.integer  "user_id"
+    t.integer  "song_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   add_index "favorites", ["song_id"], name: "index_favorites_on_song_id"
   add_index "favorites", ["user_id"], name: "index_favorites_on_user_id"
-
-  create_table "songlists", force: :cascade do |t|
-    t.integer  "song_id"
-    t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "songlists", ["song_id"], name: "index_songlists_on_song_id"
-  add_index "songlists", ["user_id"], name: "index_songlists_on_user_id"
 
   create_table "songs", force: :cascade do |t|
     t.string   "artist"
@@ -42,6 +33,17 @@ ActiveRecord::Schema.define(version: 20170601150800) do
   end
 
   add_index "songs", ["user_id"], name: "index_songs_on_user_id"
+
+  create_table "tunes", force: :cascade do |t|
+    t.string   "artist"
+    t.string   "title"
+    t.integer  "count"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "tunes", ["user_id"], name: "index_tunes_on_user_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "first_name"

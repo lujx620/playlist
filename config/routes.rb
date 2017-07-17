@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'tunes/show'
+
   root 'sessions#index'
   post 'sessions/create' =>'sessions#create'
   delete 'sessions/logout' => 'sessions#logout'
